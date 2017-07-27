@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel='favicon' src='favicon.ico'>
+    
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-social.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+  </head>
+  <body>
+  <div class='container'>
+  
+  <div class='row'>
+        <div class='col-8'>
+               <p>R is a programming language originally developed for statistical analysis</p>
+               <p>It has a lot in common with Matlab (e.g., indexing starts from 1, not 0)</p>
+               <p>If you just start to learn R, do not read wikipedia article, which is horrible </p>
+               <p>Proper IDE is strongly recommended, RStudio </p>
+               <div class="alert alert-success" role="alert">
+                        <strong>Example 1</strong> Since secondary school, I love olympiads in maths/physics/chemistry. The only subject with proper database of results in International olympiads is <a href='https://www.imo-official.org/'>mathematics</a>. Here I gather some info from 1992 and do basic analysis.
+                </div>
+               <pre class='pre-scrollable'>
+library(htmltab)
+library(dplyr)
+library(ggvis)
+TBL = data.frame()
+# grab the results of all teams from 1992 to 2017 years
+for (j in 2017:1992){
+  baseurl = 'https://www.imo-official.org/year_country_r.aspx?year='
+  url = paste0(baseurl,j,'&column=total&order=desc&language=en')
+  tbl <- htmltab(url,which = 1, rm_nodata_cols=F)
+  tbl$year = j
+  TBL <- rbind(TBL, tbl)
+}
+
+for (k in 2:16){
+  TBL[,k] <- as.numeric(TBL[,k])
+}
+#average rank of the teams in the last 10 years
+TBL %>% filter(year > 2007) %>% 
+  group_by(Country) %>% 
+  summarise(RANK = mean(Rank), POINTS = mean(Total)) %>% arrange(RANK)
+
+# show the meddal set of the winning team
+TBL %>%
+  filter(Rank == 1) %>%
+  arrange(`Awards >> G`) %>%
+  select(Country, year, `Awards >> G`, `Awards >> S`, `Awards >> B`)
+
+# select countries with at least one appearance of Rank == 1
+TBL %>% 
+  group_by(Country) %>% 
+  summarise(m = min(Rank,na.rm = T)) %>%
+  filter(m <= 1) %>%
+  select(Country) ->
+  countries
+#show results of the teams with at least one team victory
+ggvis(TBL) %>% group_by(Country) %>% 
+  filter(Country %in% countries$Country) %>% 
+  layer_paths(~year, ~Rank, stroke=~Country) %>%
+  layer_points(~year, ~Rank, fill=~Country) 
+
+               </pre>
+               <img class="img-fluid" src='pictures/r_imo.png' />
+               
+                
+        </div>
+        <div class="col-4">
+             <h3> Anton Vladyka, PhD </h3>
+             <div class='media'>
+                <img alt="" src="https://calame.unibas.ch/wp-content/uploads/AntonVladyka-214x300.jpg" style="width: 150px; height: 210px;"> 
+             </div>
+             <br/>
+              <a class="btn btn-social-icon btn-facebook" href='http://www.facebook.com/antonvladyka'>
+                <span class="fa fa-facebook"></span>
+              </a>
+              <a class="btn btn-social-icon btn-linkedin" href='https://www.linkedin.com/in/antonvladyka/'>
+                <span class="fa fa-linkedin"></span>
+              </a>
+              <a href='panorama.html'> My panoramas</a>
+              
+              
+        </div>
+        
+    
+  </div>
+  
+  </div>
+  </body>
+  </html>
