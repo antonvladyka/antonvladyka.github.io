@@ -40,7 +40,19 @@
         </div>
         
         <div class='col-9'>
-               <p>LaTeX is a publishing softawre for scientific texts</p>
+               <p>LaTeX is a publishing software for scientific texts</p>
+			   <p> For own purposes I did not use `modern` packages like <a href='https://github.com/derric/cleanthesis'>cleanthesis</a> or even KOMA. Instead I prepared my own header. Key points:
+			   <ul class='list-group'>
+					<li class='list-group-item'>Chapter page styling 
+					</li>
+					<li class='list-group-item'>Headers with page numbers on the margin
+					</li>
+					<li class='list-group-item'>Margin chapter numbers
+					</li>
+					<li class='list-group-item'>Reduced font size in bibliography, table and figure captions etc. 
+					</li>
+				</ul>
+				</p>
                
 <pre class='pre-scrollable'>
 % PAGE DIMENSIONS
@@ -126,9 +138,6 @@
       %\usepackage[light]{roboto}
       %\renewcommand{\sfdefault}{ua1}
 \fi
-</pre>
-
-<pre class='pre-scrollable'>
 
 % HEADER/FOOTER
 \usepackage{fancyhdr}
@@ -221,9 +230,7 @@
 %\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\, #1}{}}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection.\, #1}}
-</pre>
-<img src='/pictures/latex/1.png'>
-<pre class='pre-scrollable'>
+
 % FLOATING objects
 \usepackage{float}
 % PICTURES
@@ -277,9 +284,7 @@
 \makeatletter
     \def\blfootnote{\gdef\@thefnmark{}\@footnotetext}
 \makeatother
-</pre>
-<img src='/pictures/latex/4.png'>
-<pre class='pre-scrollable'>
+
 
 % TABLES: nicer rulers
 % AND nicer spacing between lines in tables
@@ -326,9 +331,6 @@
 \titleformat{\subsection}[block]{\large}{\bfseries\thesubsection.\,\,#1}{1em}{}
 %\titleformat{\subsection}{\no}{\itshape\thesubsection.\,#1}{1em}{}
 
-</pre>
-<img src='/pictures/latex/2.png'>
-<pre class='pre-scrollable'>
 % GREEK letters in section/chapter titles AND in PDF bookmarks
 %\usepackage[artemisia]{textgreek}
 
@@ -366,8 +368,87 @@
 
 </pre>
  <img src='/pictures/latex/3.png'  />   
+<img src='/pictures/latex/2.png'>
+<img src='/pictures/latex/1.png'>
+<img src='/pictures/latex/4.png'>
+<h3>Nices figures</h3>
+ Original figures exported from origin look a bit ugly because of fonts:
+ <img src='/pictures/latex/Fig1M0_old.png'>
+Of course, one way is to edit this manually or export as eps/pdf and edit in Illustrator. 
+My way is to use exported file, crop and then put labels manually in latex in any desired font. For this purpose I need to know the margins (in my case, it is 5%, 5%, 15%, 15% (trbl)), axis range and ticks values and axis titles. 
+<pre class='pre-scrollable'>
+\documentclass[convert,9pt]{standalone}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{ifxetex}
+\def\myfont{Myriad Pro}
+\ifxetex
+	\usepackage{mathspec}
+	\usepackage{polyglossia}
+	%\setdefaultlanguage[variant=us]{english}
+	\defaultfontfeatures{Ligatures=TeX} % To support LaTeX quoting style
+	\setmainfont{\myfont}
+	\setsansfont{\myfont}
+	\usepackage[italic]{mathastext}
+	\setmathsfont(Digits,Greek,Latin)[Numbers={Proportional}]{\myfont}
+	\setmathrm{\myfont}
+\else
+	\usepackage[utf8]{inputenc}
+	\usepackage[charter]{mathdesign}
+%\usepackage{mathpazo}
+%\usepackage{fourier}
+\fi
+\newdimen\fh
+\setlength\fh{5.5cm}
+\newdimen\fw
+\setlength\fw{8cm}
+\newdimen\fontlabel
+\newdimen\fontticks
+\setlength\fontlabel{11pt}
+\setlength\fontticks{9pt}
+\begin{document}
+\noindent
+\begin{tikzpicture}[x=\fw,y=\fh,every node/.style={inner sep=0pt,line width=0cm}]
+	\def\xmin{-4}%
+	\def\xmax{26}%
+	\def\ymin{-6}%
+	\def\ymax{1}%
+	\clip (-0.15,-0.15) rectangle ++(1,1);
+	\filldraw[white] (-0.15,-0.125) rectangle ++(2,1.725);
+	%\draw[help lines,step=0.05] (-0.2,-0.15) grid ++(2,2);
+	\begin{scope}
+		\clip (0,0) rectangle ++(0.8,0.8);
+		\node[anchor=south west] at (-0.15,-0.15) {\includegraphics[width=\fw,height=\fh]{Fig1M0_opening}};
+	\end{scope}
+	\draw[] (0,0) rectangle ++(0.8,0.8) coordinate (x);
+	\foreach \i in {-6,-5,-4,-3,-2,-1,0,1}{
+		\pgfmathsetmacro{\shifty}{0.8*(\i-\ymin)/(\ymax-\ymin)}
+		\node[inner sep=0.01\fw,shift={(0,\shifty)},anchor=east] at (0,0) {\fontsize{\fontticks}{\fontticks}\selectfont\i};
+	}
+	\foreach \i in {0,5,10,15,20,25}{
+		\pgfmathsetmacro{\shiftx}{0.6*(\i-\xmin)/(\xmax-\xmin)}
+		\node[inner sep=0.01\fh,shift={(\shiftx,0)},anchor=north] at (0,0) {\fontsize{\fontticks}{\fontticks}\selectfont\i};
+	}
+	\node[anchor=south,inner sep=0pt] at (0.3,-0.125) {\fontsize{\fontlabel}{\fontlabel}\selectfont{}\vphantom{bp}$\Delta\mathrm{d}\,$(\AA)};
+	\node[anchor=south,inner sep=0pt] at (0.7,-0.125) {\fontsize{\fontlabel}{\fontlabel}\selectfont\vphantom{bp}Counts};
+	\node[rotate=90,anchor=north,inner sep=0.01\fw] at (-0.125,0.4) {\fontsize{\fontlabel}{\fontlabel}\selectfont\vphantom{bp}$\log(G/G_0)$};
+	%\node[rotate=90,anchor=north,inner sep=0.01\fw] at (-0.125,0.913) {\fontsize{\fontlabel}{\fontlabel}\selectfont\vphantom{bp}Counts};
+	\node[rotate=90,anchor=south west,inner sep=0.01\fw] at (0.53,0.41) {\fontsize{\fontticks}{\fontticks}\selectfont\vphantom{bp}Counts};
+	\node[anchor=north east,inner sep=0.01\fw] at (0.6\fw,0.8\fh) {\fontsize{\fontticks}{\fontticks}\selectfont{}opening};
+	%\node[anchor=south west] at (0.025,0.025) {\includegraphics[width=0.25\fw]{BdNC}};
+	\pgfmathsetmacro{\shiftx}{0.6*(-0.5-\xmin)/(\xmax-\xmin)}
+	\pgfmathsetmacro{\shifty}{0.8*(-1.85-\ymin)/(\ymax-\ymin)}
+	\node[anchor=east,shift={(\shiftx,\shifty)}] {P1};
+	\pgfmathsetmacro{\shiftx}{0.6*(4-\xmin)/(\xmax-\xmin)}
+	\pgfmathsetmacro{\shifty}{0.8*(-3.7-\ymin)/(\ymax-\ymin)}
+	\node[anchor=east,shift={(\shiftx,\shifty)}] {P2};
+	\end{tikzpicture}
+\end{document}
+</pre>
+Compile with xelatex and then convert PDF to PNG using Imagemagick:
+ <img src='/pictures/latex/Fig1M0_new.png'>
 
- 
+
   </div>  
   </div>
   </div>
