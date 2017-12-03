@@ -373,9 +373,15 @@
 <img src='/pictures/latex/4.png'>
 <h3>Nices figures</h3>
  Original figures exported from origin look a bit ugly because of fonts:
- <img src='/pictures/latex/Fig1M0_old.png'>
+  <div class="card">
+  <h5 class="card-header">Origin figure exported from Origin</h5>
+  <div class="card-block">
+     <img src="/pictures/latex/Fig1M0_old.png" class="figure-img img-fluid rounded">
+  </div>  
+</div>
 Of course, one way is to edit this manually or export as eps/pdf and edit in Illustrator. 
 My way is to use exported file, crop and then put labels manually in latex in any desired font. For this purpose I need to know the margins (in my case, it is 5%, 5%, 15%, 15% (trbl)), axis range and ticks values and axis titles. 
+It also allows reasonable change of width/height ratio.
 <pre class='pre-scrollable'>
 \documentclass[convert,9pt]{standalone}
 \usepackage{tikz}
@@ -445,8 +451,12 @@ My way is to use exported file, crop and then put labels manually in latex in an
 	\end{tikzpicture}
 \end{document}
 </pre>
-Compile with xelatex and then convert PDF to PNG using Imagemagick:
- <img src='/pictures/latex/Fig1M0_new.png'>
+ <div class="card">
+  <h5 class="card-header">Compile with xelatex and then convert PDF to PNG using Imagemagick:</h5>
+  <div class="card-block">
+     <img src="/pictures/latex/Fig1M0_new.png" class="figure-img img-fluid rounded">
+  </div>  
+</div>
 
 
   </div>  
