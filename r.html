@@ -123,8 +123,8 @@ Finally, let's visualize these data on the map. At first, we need to get the map
 m <- readRDS('gadm36_UKR_1_sp.rds')
 map <- fortify(m)
 map$id <- sapply(map$id,as.numeric)
-# Because list of regions in spatial data and in the math data are not the same
-# Mostly bacause of different latin and cyrillic alphabets, the 1-to-1 relation is given
+# Since the order of regions in spatial data and in the math data is not the same
+# (mostly because of different latin and cyrillic alphabets), the 1-to-1 relation is given
 regions <- c(1, 25, 17, 14, 13, 16, 15, 19, 18, 20, 12, 2, 26, 21, 23, 10, 5, 8, 11, 6, 3, 27, 7, 9, 4, 22, 24)
 </pre>
 
