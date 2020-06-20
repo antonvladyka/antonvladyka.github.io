@@ -81,9 +81,77 @@ ggvis(TBL) %>% group_by(Country) %>%
 
                </pre>
                <img class="img-fluid" src='pictures/r/r_imo.png' />
+
+<div class="alert alert-success" role="alert">
+                        <strong>Example 2: Spatial data on the map</strong> 
+                </div>
+				<p>
+				Here we analyse the results of the Ukrainian secondary school students at their graduation exam. The full data contain information on plenty of subjects, I will focus only on raw math results. Raw file is available <a href='data/zno2019math.7z'>here</a>.
+				</p>
+               <pre class='pre-scrollable'>
+# Since textual data are in cyrillic, proper Locale is required
+Sys.setlocale("LC_CTYPE", "russian")
+library(tidyverse)
+library(RColorBrewer)
+# This preprocessed file contains results of the math exam together
+# with the gender and regional information of the student
+# Original results of all subjects are available at https://zno.testportal.com.ua/stat/2019
+data <- read_csv('zno2019math.csv')
+
+</pre>
+
+First, let's see on overall data:
+<pre class='pre-scrollable'>
+ggplot(data) + 
+  geom_histogram(aes(x=mathBall), binwidth=1, fill='white',color='black') + theme_bw() +
+  ggtitle('Overall math points')#
+</pre>
+<img class="img-fluid" src='pictures/r/r_math_all.png' />
+<p> Pretty disappointing. </p>
+<p> What about gender difference? </p>
+<pre class='pre-scrollable'>
+ggplot(data) + 
+  geom_histogram(aes(x=mathBall, y=..density..), binwidth=1, fill='white',color='black') + theme_bw() + facet_grid(.~SEXTYPENAME)+
+  ggtitle('Overall math points')
+</pre>
+<img class="img-fluid" src='pictures/r/r_math_sex.png' />
+<p>
+Finally, let's visualize these data on the map. At first, we need to get the map itself, i.e. coordinates of the regions.
+</p>
+<pre class='pre-scrollable'>
+# Coordinates of the regions are taken from https://gadm.org/
+m <- readRDS('gadm36_UKR_1_sp.rds')
+map <- fortify(m)
+map$id <- sapply(map$id,as.numeric)
+# Because list of regions in spatial data and in the math data are not the same
+# Mostly bacause of different latin and cyrillic alphabets, the 1-to-1 relation is given
+regions <- c(1, 25, 17, 14, 13, 16, 15, 19, 18, 20, 12, 2, 26, 21, 23, 10, 5, 8, 11, 6, 3, 27, 7, 9, 4, 22, 24)
+</pre>
+
+<p>Second, let's calculate the mean point  for each region.
+</p>
+<pre class='pre-scrollable'>
+data %>%
+  group_by(REGNAME) %>%
+  summarize(M=mean(mathBall)) -> y
+</pre>
+<p>And place in on map: </p>
+<pre class='pre-scrollable'>
+ggplot(map) + 
+  geom_polygon(aes(x=long,y=lat,group=group,fill=y$M[regions[id]]),color='black') + 
+  scale_fill_stepsn(colours=brewer.pal(11,'Spectral')[11:1], n.breaks=9) + 
+  coord_map("stereographic",xlim=c(23.5,39),ylim=c(44.5,52)) +
+  guides(fill = guide_coloursteps(barwidth = 1.5, barheight = 10))+
+  theme_bw() +
+  # xlim(c(22.13,40.22))+ylim(c(44.37,52.4)) + 
+  labs(fill = "Points") +
+  ggtitle('Average math points by region')
+</pre>
+               <img class="img-fluid" src='pictures/r/r_math_map.png' />
+<p> It is sad that only the capital city shows reasonable results. A lot of work has to be done by the Ministry of Education.</p>
                
                <div class="alert alert-success" role="alert">
-                        <strong>Example 2: Hiking/skiing</strong> I like hiking and skiing in Switzerland. I usually record all my tracks with my phone into GPX file and then analyze it and make maps.
+                        <strong>Example 3: Hiking/skiing</strong> I like hiking and skiing in Switzerland. I usually record all my tracks with my phone into GPX file and then analyze it and make maps.
                 </div>
 <pre class='pre-scrollable'>
 require(plotKML)
