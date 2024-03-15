@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Anton Vladyka
+        </title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+	    <style type="text/css">
+			a.badge {text-decoration: none};
+			a.nav-link:hover{border:1px solid #aaccee};
+		</style>
+		</head>
+    <body>
+		<nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+			<div class="container-sm">
+				<a class="navbar-brand" href="index.html">Anton Vladyka</a>
+				<ul class="nav nav-pills">
+					<li class="nav-item">
+						<a class="nav-link"href="index.html">Summary</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="#">My works</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="3d.html">3D graphics</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="cv.html">CV</a>
+					</li>
+				  </ul>
+				</nav>
+				</nav>
+			</div>
+		</nav>
+		<br/>
+		<div class='container-sm container-md'>
+			<div class="row row-cols-1 row-cols-md-2 g-4">
+				<div class="col">
+				  <div class="card h-100">
+					<div class="card-header">
+						1. Emulator-based component analysis <span class="badge text-bg-success">Pytorch</span> <span class="badge text-bg-warning">Research</span>
+					</div>
+					<img src="images/works/eca.png" class="card-img-top" alt="Schematics" title="Schematics">
+					<div class="card-body">
+					  <p class="card-text">Idea of the approach is to use a trained predictor <strong>X&rarr;Y</strong> (e.g., a neural network) to define a subspace in <strong>X</strong>, so that it covers the majority of predicted variance in <strong>Y</strong>, i.e., to achieve a dimensionaity reduction.
+					  </p>
+					  <p>
+						Original work was first implemented using <em>sklearn</em> and <em>scipy.optimize</em> routines, but later rewritten in Pytorch, gaining 10x improvement in speed. </p>
+					</div>
+					<div class="card-footer">
+						<small class="text-body-secondary"><a href="https://github.com/antonvladyka/eca" target="_blank"">Github</a> | <a href="https://royalsocietypublishing.org/doi/10.1098/rsos.220093" target="_blank"">Original research article </a> | <a href='https://arxiv.org/abs/2312.12967' target="_blank"">Revised version</a></small>
+   			 	    </div>
+				  </div>
+				</div>
+				<div class="col">
+				  <div class="card h-100">
+					<div class="card-header">
+						2. Neural networks tutorial <span class="badge text-bg-success">LaTeX</span></h4>
+					</div>
+					<img src="images/works/tutorial.png" class="card-img-top" alt="Repository" title="Popular repository">
+					<div class="card-body">
+					  <p class="card-text">I've assembled popular online tutorial “Neural Networks and Deep Learning” from <a href="https://github.com/mnielsen" target="_blank"">Mickael Nielsen</a> into LaTeX/source, so it can be easily compiled into PDF or EPUB, which many users found more suitable for reading. One chapter of this tutorial, which in the original HTML version contains plenty of interavtive JS elements, I replaced with Tikz-based graphics.</p>
+					</div>
+					<div class="card-footer">
+						<small class="text-body-secondary"><a href='https://github.com/antonvladyka/neuralnetworksanddeeplearning.com.pdf' target="_blank"">Github</a> | <a href='http://neuralnetworksanddeeplearning.com/' target="_blank"">Original HTML tutorial</a></small>
+   			 	    </div>
+				  </div>
+				</div>
+				<div class="col">
+				  <div class="card h-100">
+					<div class="card-header">
+						3. Object recognition &amp; transfer learning for data classification  <span class="badge text-bg-success">Pytorch</span> <span class="badge text-bg-warning">Research</span>
+					</div>
+					<img src="images/works/mlst.jpg" class="card-img-top" alt="Concept" title="Workflow">
+					<div class="card-body">
+						<!--<h5 class="card-title"></h5>-->
+						<p class="card-text">I have demonstrated, how by combining trained Neural Network (here, AlexNet) with clustering approaches, it is possible to create an unvonventional approach for unsupervised classification of scientific data. This method was tested on synthetic data as well on the real experimental data measured during my PhD studies.</p>
+					  </div>
+					  <div class="card-footer">
+						  <small class="text-body-secondary">This work was published as a <a href='https://iopscience.iop.org/article/10.1088/2632-2153/aba6f2/meta' target="_blank"">research article</a>.</small>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+				  <div class="card h-100">
+					<div class="card-header">
+						4. GUI design&nbsp;<span class="badge text-bg-success">PyQt</span>
+					</div>
+					<img src="images/works/pyqt.png" class="card-img-top" alt="GUI of the software" title="GUI of the software">
+					<div class="card-body">
+					  <p class="card-text">The project I've done for <a href="https://www.c12qe.com/" target="_blank">C12 Quantum Electronics start-up</a>: GUI design for the control system of the furnace to grow carbon nanotubes.</p>
+					</div>
+					<div class="card-footer">
+						<small class="text-body-secondary">&nbsp;</small>
+   			 	    </div>
+				  </div>
+				</div>
+				<div class="col">
+					<div class="card h-100">
+						<div class="card-header">
+							5. Gromacs files handling <span class="badge text-bg-success">Python</span>&nbsp;<span class="badge text-bg-warning">Research</span>
+						</div>
+					  <img src="images/works/gromacs.jpg" class="card-img-top" alt="MD snapshot">
+					  <div class="card-body">
+						<p class="card-text">For our work, I've created a set of classes to handle input and output files of Gromacs (molecular dynamics simulation software): allows to handle individual molecules, individual snapshots and the entire MD trajectory. Reads <em>*.trr</em> and <em>*.gro</em> files, fixes molecule broken by the simulation box. Also generates a correct input for further spectral calculations.</p>
+					  </div>
+					  <div class="card-footer">
+						<small class="text-body-secondary"><a href="https://github.com/antonvladyka/gro" target="_blank">Github</a></small>
+   			 	    </div>
+					</div>
+				  </div>
+				  <div class="col">
+					<div class="card h-100">
+						<div class="card-header">
+							6. HDF viewer <span class="badge text-bg-success">PyQt</span></span>
+						</div>
+					  <img src="images/works/hdfviewer.png" class="card-img-top" alt="HDF viewer.">
+					  <div class="card-body">
+						<p class="card-text">We store plenty of research data in HDF files. For a quick inspection of the file contents, I've written tiny HDF viewer wit GUI. </p>
+					  </div>
+					  <div class="card-footer">
+						<small class="text-body-secondary"><a href="https://github.com/antonvladyka/HdfViewer" target="_blank"">Github</a></small>
+   			 	    </div>
+					</div>
+				  </div>
+				  <div class="col">
+					<div class="card h-100">
+						<div class="card-header">
+							7. Liquid helium management system @ University of Basel <span class="badge text-bg-success">PHP/SQL</span>
+						</div>
+					  <!--<img src="..." class="card-img-top" alt="...">-->
+					  <div class="card-body">
+						<!--<h5 class="card-title">Card title</h5>-->
+						<p class="card-text">As my last project at the University, I <a href="https://helium.physik.unibas.ch/" target="_blank"">created</a> a replacement of the outdated version of the website to manage liquid helium consumed by the physics department: orders from the research groups and deliveries by the engineer.</p>
+					  </div>
+					  <div class="card-footer">
+						<small class="text-body-secondary">&nbsp;</small>
+   			 	    </div>
+					</div>
+				  </div>
+				  <div class="col">
+					<div class="card h-100">
+					  <div class="card-header">
+						  8. Websites management <span class="badge text-bg-success">Wordpress</span>
+					  </div>
+					  <!--<img src="..." class="card-img-top" alt="...">-->
+					  <div class="card-body">
+						<p class="card-text">I was responsible for handling two Wordpress-based websites of two researche groups I belonged to: <a href="https://nanoelectronics.unibas.ch/" target="_blank"">nanoelectronics.unibas.ch</a> and <a href="https://calame.unibas.ch" target="_blank"">calame.unibas.ch</a> (the latter is not updating anymore, since my supervisor has moved to another place). Apart from regular installation &amp; management, I've tweaked the source code of the theme and of biblipgraph plug-in:
+						  <ol>
+							  <li>I've added a functionality of the keyword selection of the references </li>
+							  <li>Upon request, the references not also include links to data- and script repositories following OpenScience policy.</li>
+						  </ol></p>
+					  </div>
+					<div class="card-footer">
+						<small class="text-body-secondary">&nbsp;</small>
+   			 	    </div>
+					</div>
+					
+				  </div>
+			  </div>
+			
+		</div>
+    </body>
+</html>
