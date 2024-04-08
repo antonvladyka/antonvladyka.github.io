@@ -89,9 +89,15 @@
 								<img src="icons/icon_github.svg" width="32" height="32"/>
 								<a href="https://github.com/antonvladyka" target="_blank">Github</a></p>
 							<p>
+								<img src="icons/icon_telegram.svg" width="32" height="32"/>
+								<a href="https://t.me/antonvladyka/" target="_blank">Telegram</a>
+								<img src="images/telegram_qr.png"  id="telegram" style="cursor:pointer; width:32px" title="Show/hide"/>
+							</p>
+							<p>
 								<img src="icons/icon_lang.svg" width="32" height="32" title="Languages"/>
 								<img src="icons/icon_en.svg" width="32" height="32" title="English: fluent">&nbsp;<img src="icons/icon_fi.svg" width="24" height="24" title="Finnish: A2">&nbsp;<img src="icons/icon_de.svg" width="24" height="24" title="German: A2">&nbsp;<img src="icons/icon_ua.svg" width="32" height="32" title="Ukrainian: native">&nbsp;<img src="icons/icon_ru.svg" width="32" height="32" title="Russian: native">
 							</p>
+							
 						</div>
 					</div>
 					&nbsp;
@@ -124,8 +130,16 @@
 				</div>
 			</div>   
 		</div>
-
-
-
+	<script type="text/javascript">
+		document.querySelector("#telegram").onclick = function(){
+			if (this.style.width == "32px"){
+				this.style.width = "";
+				this.style.paddingLeft = "35px";
+			} else {
+				this.style.width = "32px";
+				this.style.paddingLeft = "0px";
+			}
+		}
+	</script>
     </body>
 </html>
