@@ -69,15 +69,17 @@
 					  <!--<img src="images/works/mlst.jpg" class="card-img-top" alt="Concept" title="Workflow">-->
 					  <div class="card-body">
 						  <!--<h5 class="card-title"></h5>-->
-						  <p class="card-text">As a test task, I've implemented Authenticatino API in Django, which allows registration, login/logout, refresh of the access tokens and retrieval of personal information. Final version was deployed at <img src="icons/icon_azure.svg" width="24"/>Azure.</p>
+						  <p class="card-text">As a test task, I've implemented Authenticatino API in Django, which allows registration, login/logout, refresh of the access tokens and retrieval of personal information. Final version was deployed at <img src="icons/icon_azure.svg" width="24"/>Azure and also to Google Cloud Platform.</p>
 						  <pre class="font-monospace" style="color:white; background-color:#324250">$ curl -X POST https://djangorest.azurewebsites.net/api/register/ -d "{\"password\": \"password\", \"email\": \"user@example.com\"}" -H "Content-Type: application/json"
 {"id":8,"email":"user@example.com"}
 $ curl -X POST https://djangorest.azurewebsites.net/api/login/ -d "{\"password\": \"password\", \"email\": \"user@example.com\"}" -H "Content-Type: application/json"
 {"refresh_token":"be1cafc0-f8c1-11ee-abe6-820a10a51612","access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVkIjoxNzEyOTI1NzQ5LjY5MTMyNiwidXNlcl9pZCI6OH0.z5lfLvm65GgGY6awXH0l31hCeQyRHWruwtF5OBGJ2_U"}
+$ curl -X POST http://django-420215.lm.r.appspot.com/api/login/ -d "{\"password\": \"passw0rt\", \"email\": \"django@unchained.com\"}" -H "Content-Type: application/json"
+{"refresh_token":"9baf5ede-fe17-11ee-845a-70b5e83d9f62","access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVkIjoxNzEzNTI0MzU0LjA3OTQ3OSwidXNlcl9pZCI6MX0.Nofz1EbWnzrAFvm8C2dXxlZFXcqRvHhqPUcRZEgUL-o","message":"Refresh token already exists"}
 						  </pre>
 						</div>
 						<div class="card-footer">
-							<small class="text-body-secondary"><a href="https://github.com/antonvladyka/djangorest/blob/main/theapp/views.py" target="_blank">Github</a> | <a href="https://djangorest.azurewebsites.net/api/register/" target="_blank">Deployment</a></small>
+							<small class="text-body-secondary"><a href="https://github.com/antonvladyka/djangorest/blob/main/theapp/views.py" target="_blank">Github</a> | <a href="https://djangorest.azurewebsites.net/api/register/" target="_blank">Deployed at Azure</a> | <a href="http://django-420215.lm.r.appspot.com/" target="_blank">Deployed at Google Cloud</a></small>
 						  </div>
 					  </div>
 				  </div>  
